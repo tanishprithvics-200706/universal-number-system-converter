@@ -1,6 +1,7 @@
 const express = require("express");
 const cors    = require("cors");
 const path    = require("path");
+const os      = require("os");
 
 const app  = express();
 const PORT = process.env.PORT || 3001;
@@ -152,7 +153,17 @@ app.get("/api/health", (_req, res) =>
 app.get("/{*path}", (_req, res) =>
   res.sendFile(path.join(__dirname, "public", "index.html")));
 
-app.listen(PORT, () =>
-  console.log(`✅  Universal Number Converter running → http://localhost:${PORT}`));
+app.listen(PORT, "0.0.0.0", () => {
+  const nets = os.networkInterfaces();
+  let localIP = "localhost";
+  for (const name of Object.keys(nets)) {
+    for (const net of nets[name]) {
+      if (net.family === "IPv4" && !net.internal) localIP = net.address;
+    }
+  }
+  console.log(`✅ Universal Number Converter running!`);
+  console.log(`   Local:   http://localhost:${PORT}`);
+  console.log(`   Network: http://${localIP}:${PORT}`);
+});
 
 module.exports = app;
