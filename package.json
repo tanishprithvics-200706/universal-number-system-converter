@@ -1,0 +1,32 @@
+{
+  "name": "universal-number-system-converter",
+  "version": "1.0.0",
+  "description": "A full-stack Universal Number System Converter – convert between Binary, Octal, Decimal & Hexadecimal with step-by-step explanations, history, reference table and an interactive digit keyboard.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev":   "node server.js"
+  },
+  "keywords": [
+    "number-system",
+    "converter",
+    "binary",
+    "octal",
+    "decimal",
+    "hexadecimal",
+    "base-conversion",
+    "step-by-step",
+    "nodejs",
+    "express",
+    "computer-science"
+  ],
+  "author": "anishfathima200704-art",
+  "license": "MIT",
+  "dependencies": {
+    "cors":    "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
