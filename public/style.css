@@ -17,7 +17,7 @@
   --violet:      #a764ff;
   --violet-dark: #7c3aed;
   --violet-deep: #5b21b6;
-  --violet-glow: rgba(167, 100, 255, 0.35);
+
   --pink:        #e879f9;
   --indigo:      #818cf8;
 
@@ -38,9 +38,7 @@
   --sans:        'Inter', sans-serif;
   --trans:       0.22s cubic-bezier(.4,0,.2,1);
 
-  --glow:        0 0 30px rgba(167,100,255,0.3);
-  --glow-sm:     0 0 12px rgba(167,100,255,0.22);
-  --shadow:      0 8px 32px rgba(0,0,0,0.5);
+  --shadow:      0 4px 16px rgba(0,0,0,0.4);
 }
 
 html { scroll-behavior: smooth; }
@@ -53,37 +51,11 @@ body {
   overflow-x: hidden;
 }
 
-/* ── Animated background orbs ── */
-.bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.orb {
-  position: absolute; border-radius: 50%;
-  filter: blur(80px); opacity: 0.45; animation: orbFloat 12s ease-in-out infinite alternate;
-}
-.orb1 { width: 500px; height: 500px; background: radial-gradient(circle, #7c3aed, transparent 70%);
-        top: -150px; left: -150px; animation-duration: 14s; }
-.orb2 { width: 400px; height: 400px; background: radial-gradient(circle, #a855f7, transparent 70%);
-        bottom: -100px; right: -100px; animation-duration: 11s; animation-delay: -4s; }
-.orb3 { width: 300px; height: 300px; background: radial-gradient(circle, #e879f9, transparent 70%);
-        top: 50%; left: 50%; transform: translate(-50%,-50%); animation-duration: 16s; animation-delay: -7s; opacity: 0.2; }
+/* bg-orbs hidden – no glow effect */
+.bg-orbs { display: none; }
 
-@keyframes orbFloat {
-  from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(30px, 20px) scale(1.08); }
-}
-.orb3 { animation-name: orbFloat3; }
-@keyframes orbFloat3 {
-  from { transform: translate(-50%,-50%) scale(0.9); }
-  to   { transform: translate(-50%,-50%) scale(1.15); }
-}
-
-/* Grid overlay */
-.grid-overlay {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(167,100,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(167,100,255,0.04) 1px, transparent 1px);
-  background-size: 44px 44px;
-}
+/* Grid overlay removed */
+.grid-overlay { display: none; }
 
 /* ── Header ── */
 header {
@@ -156,7 +128,7 @@ main {
 }
 .input-row input:focus {
   outline: none; border-color: var(--violet);
-  box-shadow: 0 0 0 3px rgba(167,100,255,0.18);
+  box-shadow: none;
 }
 .input-row input.error { border-color: var(--danger); }
 
@@ -181,7 +153,6 @@ main {
 .base-btn.active {
   background: linear-gradient(135deg, rgba(124,58,237,0.5), rgba(232,121,249,0.3));
   border-color: var(--violet); color: #fff;
-  box-shadow: var(--glow-sm);
 }
 .base-icon { font-size: 0.7rem; opacity: 0.7; }
 
@@ -208,9 +179,8 @@ main {
   border: none; color: #fff; font-size: 1rem; font-weight: 700;
   cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.6rem;
   letter-spacing: 0.4px; transition: var(--trans);
-  box-shadow: 0 4px 20px rgba(167,100,255,0.35);
 }
-.convert-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(167,100,255,0.5); }
+.convert-btn:hover { transform: translateY(-2px); }
 .convert-btn:active { transform: translateY(0); }
 
 /* ── RESULTS GRID ── */
@@ -225,19 +195,13 @@ main {
   box-shadow: var(--shadow); transition: border-color var(--trans), box-shadow var(--trans);
   position: relative; overflow: hidden;
 }
-.res-card::before {
-  content: ''; position: absolute; inset: 0; opacity: 0; border-radius: inherit;
-  transition: opacity var(--trans);
-  background: linear-gradient(135deg, rgba(167,100,255,0.07), transparent 60%);
-}
-.res-card:hover::before { opacity: 1; }
-.res-card:hover { border-color: var(--border-bright); box-shadow: var(--glow); }
+.res-card::before { display: none; }
+.res-card:hover { border-color: var(--border-bright); }
 
 /* Source card highlight */
 .res-card.source-card {
   border-color: var(--violet);
   background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(22,12,42,0.9));
-  box-shadow: var(--glow);
 }
 .source-badge {
   position: absolute; top: 0.7rem; right: 0.7rem;
@@ -381,7 +345,7 @@ main {
   position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px);
   background: var(--surface2); border: 1px solid var(--violet);
   color: var(--text); padding: 0.65rem 1.5rem; border-radius: 999px;
-  font-size: 0.85rem; z-index: 1000; box-shadow: var(--glow);
+  font-size: 0.85rem; z-index: 1000;
   opacity: 0; pointer-events: none; transition: all 0.28s ease;
 }
 .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
