@@ -149,7 +149,7 @@ app.get("/api/health", (_req, res) =>
   res.json({ status: "ok", uptime: process.uptime() }));
 
 // ── Serve frontend ─────────────────────────────────────────────────────────
-app.get("*", (_req, res) =>
+app.get("/{*path}", (_req, res) =>
   res.sendFile(path.join(__dirname, "public", "index.html")));
 
 app.listen(PORT, () =>
